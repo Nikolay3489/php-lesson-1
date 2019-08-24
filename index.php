@@ -57,28 +57,25 @@
                               </div>
 
                                 <?php
-                                $comment = [ [
-                                    'userName' => 'John Doe',
-                                    'userImg' => 'img/no-user.jpg',
-                                    'commentDate' => '12/10/2025',
-                                    'commentText' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe aspernatur, ullam doloremque deleniti, sequi obcaecati.'
-                                ],
-
-                                    [ 'userName' => 'Николай',
-                                        'userImg' => 'img/avatar1.jpg',
-                                        'commentDate' => '12/10/2025',
-                                        'commentText' => 'Я оставил коментраий.'
-                                    ]
-                                ];
+                                //соединени с бд
+                                $host = 'localhost';
+                                $user = 'root';
+                                $password = '';
+                                $dbName = 'gb';
+                                $db = mysqli_connect($host, $user, $password, $dbName);
+                                //запрос в базу
+                                $sql = mysqli_query($db, "SELECT * FROM Comment ");
+                                // Выводим в ассоциатвный масвив
+                                $data = mysqli_fetch_all($sql, MYSQLI_ASSOC);
                                 ?>
-                                <?php foreach($comment as $comments): ?>
+                                <?php foreach($data as $comments): ?>
                                 <div class="media">
-                                  <img src="<?php echo $comments['userImg']; ?>" class="mr-3" alt="..." width="64" height="64">
+                                  <img src="<?php echo $comments['img']; ?>" class="mr-3" alt="..." width="64" height="64">
                                   <div class="media-body">
-                                    <h5 class="mt-0"><?php echo $comments['userName']; ?></h5>
-                                    <span><small><?php echo $comments['commentDate']; ?></small></span>
+                                    <h5 class="mt-0"><?php echo $comments['name']; ?></h5>
+                                    <span><small><?php echo $comments['date']; ?></small></span>
                                     <p>
-                                        <?php echo $comments['commentText']; ?>
+                                        <?php echo $comments['text']; ?>
                                     </p>
                                   </div>
                                 </div>

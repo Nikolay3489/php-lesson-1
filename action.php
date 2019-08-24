@@ -2,6 +2,10 @@
 //В обработчике принимаем данные из массива $_POST
 $nameComment =  $_POST['name'];
 $textComment = $_POST['text'];
+//проверка ввел ли пользователь данные
+if ($nameComment == null and $textComment == null){
+    header('Location: index.php');
+}else{
 //Соединяемся с базой данных
 $host = 'localhost';
 $user = 'root';
@@ -15,6 +19,7 @@ $insert = "INSERT INTO `comment` (`id`, `name`, `text`) VALUES (NULL, '$nameComm
 $res_insert = mysqli_query($db, $insert);
 //Переадресацию на главную страницу
 if ($res_insert){
-      header('Location: index.php');
+    header('Location: index.php');
+};
 };
 ?>
