@@ -73,7 +73,7 @@ session_start();
                                 $dbName = 'gb';
                                 $db = mysqli_connect($host, $user, $password, $dbName);
                                 //запрос в базу
-                                $sql = mysqli_query($db, "SELECT * FROM Comment ");
+                                $sql = mysqli_query($db, "SELECT * FROM Comment ORDER BY id DESC ");
                                 // Выводим в ассоциатвный масвив
                                 $data = mysqli_fetch_all($sql, MYSQLI_ASSOC);
                                 ?>
