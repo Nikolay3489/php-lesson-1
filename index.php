@@ -76,13 +76,18 @@ session_start();
                                 $sql = mysqli_query($db, "SELECT * FROM Comment ORDER BY id DESC ");
                                 // Выводим в ассоциатвный масвив
                                 $data = mysqli_fetch_all($sql, MYSQLI_ASSOC);
+                                //$data{'date'} = strftime(timestamp);
+                                //$data{'date'} = date('d/m/Y');
                                 ?>
                                 <?php foreach($data as $comments): ?>
                                 <div class="media">
                                   <img src="<?php echo $comments['img']; ?>" class="mr-3" alt="..." width="64" height="64">
                                   <div class="media-body">
                                     <h5 class="mt-0"><?php echo $comments['name']; ?></h5>
-                                    <span><small><?php echo $comments['date']; ?></small></span>
+                                    <span><small><?php
+                                            $comments{'date'} = strftime(timestamp);
+                                            $comments{'date'} = date('d/m/Y');
+                                            echo $comments['date']; ?></small></span>
                                     <p>
                                         <?php echo $comments['text']; ?>
                                     </p>
