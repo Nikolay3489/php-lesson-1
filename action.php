@@ -17,9 +17,11 @@ $db = mysqli_connect($host, $user, $password, $dbName);
 $insert = "INSERT INTO `comment` (`id`, `name`, `text`) VALUES (NULL, '$nameComment', '$textComment')";
 //Выполняет запрос к базе данных
 $res_insert = mysqli_query($db, $insert);
-//Переадресацию на главную страницу
+
 if ($res_insert){
-    header('Location: index.php');
+    session_start();
+    $_SESSION{'name'} = $nameComment;
+     header('Location: index.php');
 };
 };
 ?>

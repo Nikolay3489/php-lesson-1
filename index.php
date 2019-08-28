@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,10 +55,16 @@
                             <div class="card-header"><h3>Комментарии</h3></div>
 
                             <div class="card-body">
-                              <div class="alert alert-success" role="alert">
-                                Комментарий успешно добавлен
-                              </div>
-
+                                <?php
+                                //var_dump($_SESSION{'name'});
+                                if ($_SESSION{'name'} != null){
+                                    echo '<div class="alert alert-success" role="alert">
+                                    Комментарий успешно добавлен
+                                </div>
+                                ';
+                                unset($_SESSION{'name'});
+                                };
+                              ?>
                                 <?php
                                 //соединени с бд
                                 $host = 'localhost';
