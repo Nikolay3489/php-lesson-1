@@ -56,7 +56,7 @@ session_start();
 
                             <div class="card-body">
                                 <?php
-                                //var_dump($_SESSION{'name'});
+                                //флеш уведомление
                                 if ($_SESSION{'name'} != null){
                                     echo '<div class="alert alert-success" role="alert">
                                     Комментарий успешно добавлен
@@ -76,8 +76,6 @@ session_start();
                                 $sql = mysqli_query($db, "SELECT * FROM Comment ORDER BY id DESC ");
                                 // Выводим в ассоциатвный масвив
                                 $data = mysqli_fetch_all($sql, MYSQLI_ASSOC);
-                                //$data{'date'} = strftime(timestamp);
-                                //$data{'date'} = date('d/m/Y');
                                 ?>
                                 <?php foreach($data as $comments): ?>
                                 <div class="media">
@@ -104,15 +102,43 @@ session_start();
                     <div class="col-md-12" style="margin-top: 20px;">
                         <div class="card">
                             <div class="card-header"><h3>Оставить комментарий</h3></div>
-                                    <?php echo $echoE;?>
                             <div class="card-body">
                                 <form action="action.php" method="post">
                                     <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Имя</label>
-                                    <input name="name" class="form-control" id="exampleFormControlTextarea1" />
+                                    <?php
+                                    //валидация
+                                        if ($_SESSION['commentUserError'] == 'true'){
+                                            echo '<style type="text/css">
+                                            .form-group p{
+                                                background: red;
+                                                padding: 5px 2px;
+                                                border: 1px solid #000;
+                                                text-align: center;
+                                            }
+                                        </style>
+                                        <p>Вы не вили своё имя</p>';
+                                            unset($_SESSION['commentUserError']);
+                                        };
+                                    ?>
+                                    <input name="name" class="form-control" id="exampleFormControlTextarea1"  value="dfdsfds"/>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Сообщение</label>
+                                      <?php
+                                      if ($_SESSION['commentTextError'] == 'true'){
+                                          echo '<style type="text/css">
+                                            .form-group p{
+                                                background: red;
+                                                padding: 5px 2px;
+                                                border: 1px solid #000;
+                                                text-align: center;
+                                            }
+                                        </style>
+                                        <p>Вы не вили свой коментарий</p>';
+                                          unset($_SESSION['commentTextError']);
+                                      };
+                                      ?>
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                   </div>
                                   <button type="submit" class="btn btn-success">Отправить</button>
